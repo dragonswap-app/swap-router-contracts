@@ -5,28 +5,28 @@ import { Fixture } from 'ethereum-waffle'
 import { ImmutableStateTest } from '../typechain'
 import { expect } from './shared/expect'
 import completeFixture from './shared/completeFixture'
-import { v2FactoryFixture } from './shared/externalFixtures'
+import { v1FactoryFixture } from './shared/externalFixtures'
 
 describe('ImmutableState', () => {
   const fixture: Fixture<{
-    factoryV2: Contract
+    factoryV1: Contract
     nft: Contract
     state: ImmutableStateTest
   }> = async (wallets, provider) => {
-    const { factory: factoryV2 } = await v2FactoryFixture(wallets, provider)
+    const { factory: factoryV1 } = await v1FactoryFixture(wallets, provider)
     const { nft } = await completeFixture(wallets, provider)
 
     const stateFactory = await ethers.getContractFactory('ImmutableStateTest')
-    const state = (await stateFactory.deploy(factoryV2.address, nft.address)) as ImmutableStateTest
+    const state = (await stateFactory.deploy(factoryV1.address, nft.address)) as ImmutableStateTest
 
     return {
       nft,
-      factoryV2,
+      factoryV1,
       state,
     }
   }
 
-  let factoryV2: Contract
+  let factoryV1: Contract
   let nft: Contract
   let state: ImmutableStateTest
 
@@ -37,16 +37,16 @@ describe('ImmutableState', () => {
   })
 
   beforeEach('load fixture', async () => {
-    ;({ factoryV2, nft, state } = await loadFixture(fixture))
+    ;({ factoryV1, nft, state } = await loadFixture(fixture))
   })
 
   it('bytecode size', async () => {
     expect(((await state.provider.getCode(state.address)).length - 2) / 2).to.matchSnapshot()
   })
 
-  describe('#factoryV2', () => {
-    it('points to v2 core factory', async () => {
-      expect(await state.factoryV2()).to.eq(factoryV2.address)
+  describe('#factoryV1', () => {
+    it('points to v1 core factory', async () => {
+      expect(await state.factoryV1()).to.eq(factoryV1.address)
     })
   })
 

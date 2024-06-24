@@ -1,18 +1,18 @@
 import { Fixture } from 'ethereum-waffle'
 import { ethers, waffle } from 'hardhat'
-import { v3RouterFixture } from './externalFixtures'
+import { v2RouterFixture } from './externalFixtures'
 import { constants, Contract } from 'ethers'
-import { IWETH9, MockTimeSwapRouter02, TestERC20 } from '../../typechain'
+import { IWSEI, MockTimeSwapRouter02, TestERC20 } from '../../typechain'
 
 const completeFixture: Fixture<{
-  weth9: IWETH9
-  factoryV2: Contract
+  wsei: IWSEI
+  factoryV1: Contract
   factory: Contract
   router: MockTimeSwapRouter02
   nft: Contract
   tokens: [TestERC20, TestERC20, TestERC20]
 }> = async ([wallet], provider) => {
-  const { weth9, factoryV2, factory, nft, router } = await v3RouterFixture([wallet], provider)
+  const { wsei, factoryV1, factory, nft, router } = await v2RouterFixture([wallet], provider)
 
   const tokenFactory = await ethers.getContractFactory('TestERC20')
   const tokens: [TestERC20, TestERC20, TestERC20] = [
@@ -24,8 +24,8 @@ const completeFixture: Fixture<{
   tokens.sort((a, b) => (a.address.toLowerCase() < b.address.toLowerCase() ? -1 : 1))
 
   return {
-    weth9,
-    factoryV2,
+    wsei,
+    factoryV1,
     factory,
     router,
     tokens,

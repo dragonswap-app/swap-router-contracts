@@ -39,8 +39,8 @@ contract MixedRouteQuoterV1 is IMixedRouteQuoterV1, IDragonswapV2SwapCallback, P
     constructor(
         address _factory,
         address _factoryV1,
-        address _WETH9
-    ) PeripheryImmutableState(_factory, _WETH9) {
+        address _WSEI
+    ) PeripheryImmutableState(_factory, _WSEI) {
         factoryV1 = _factoryV1;
     }
 

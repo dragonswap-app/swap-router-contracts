@@ -147,11 +147,11 @@ export async function createPoolWithZeroTickInitialized(
 }
 
 /**
- * Create V2 pairs for testing with IL routes
+ * Create V1 pairs for testing with IL routes
  */
-export async function createPair(v2Factory: Contract, tokenAddressA: string, tokenAddressB: string): Promise<string> {
+export async function createPair(v1Factory: Contract, tokenAddressA: string, tokenAddressB: string): Promise<string> {
   // .createPair() sorts the tokens already
-  const receipt = await (await v2Factory.createPair(tokenAddressA, tokenAddressB)).wait()
+  const receipt = await (await v1Factory.createPair(tokenAddressA, tokenAddressB)).wait()
   // we can extract the pair address from the emitted event
   // always the 3rd element:         emit PairCreated(token0, token1, pair, allPairs.length);
   const pairAddress = receipt.events[0].args[2]

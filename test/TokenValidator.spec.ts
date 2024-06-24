@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import { constants } from 'ethers'
 import hre, { ethers } from 'hardhat'
-import { TokenValidator, TestERC20, IUniswapV2Pair__factory } from '../typechain'
+import { TokenValidator, TestERC20, IDragonswapPair__factory } from '../typechain'
 
 describe('TokenValidator', function () {
   let tokenValidator: TokenValidator
@@ -15,7 +15,7 @@ describe('TokenValidator', function () {
     STF = 2,
   }
 
-  // WETH9 and USDC
+  // WSEI and USDC
   const BASE_TOKENS = ['0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2', '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48']
   // Arbitrary amount to flash loan.
   const AMOUNT_TO_BORROW = 1000
@@ -34,7 +34,7 @@ describe('TokenValidator', function () {
     '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', // USDC
     '0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984', // UNI
     '0xc00e94Cb662C3520282E6f5717214004A7f26888', // COMP
-    '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2', // WETH9
+    '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2', // WSEI
   ]
 
   before(async function () {
@@ -57,8 +57,8 @@ describe('TokenValidator', function () {
 
     const factory = await ethers.getContractFactory('TokenValidator')
     tokenValidator = (await factory.deploy(
-      '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f', // V2 Factory
-      '0xC36442b4a4522E871399CD717aBDD847Ab11FE88' // V3 NFT position manager
+      '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f', // V1 Factory
+      '0xC36442b4a4522E871399CD717aBDD847Ab11FE88' // V2 NFT position manager
     )) as TokenValidator
 
     // Deploy a new token for testing.
@@ -98,20 +98,20 @@ describe('TokenValidator', function () {
   })
 
   it('succeeds to return unknown when flash loaning full reserves', async () => {
-    const pairAddress = '0xab293dce330b92aa52bc2a7cd3816edaa75f890b' // WTF/ETH pair
-    const pair = IUniswapV2Pair__factory.connect(pairAddress, ethers.provider)
+    const pairAddress = '0xab293dce330b92aa52bc2a7cd3816edaa75f890b' // WTF/SEI pair
+    const pair = IDragonswapPair__factory.connect(pairAddress, ethers.provider)
     const { reserve0: wtfReserve } = await pair.callStatic.getReserves()
 
     const isFot1 = await tokenValidator.callStatic.validate(
       '0xa68dd8cb83097765263adad881af6eed479c4a33', // WTF
-      ['0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'], // WETH
+      ['0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'], // WSEI
       wtfReserve.sub(1).toString()
     )
     expect(isFot1).to.equal(Status.FOT)
 
     const isFot2 = await tokenValidator.callStatic.validate(
       '0xa68dd8cb83097765263adad881af6eed479c4a33', // WTF
-      ['0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'], // WETH
+      ['0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'], // WSEI
       wtfReserve.toString()
     )
     expect(isFot2).to.equal(Status.UNKN)
