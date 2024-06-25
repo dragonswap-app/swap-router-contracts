@@ -34,12 +34,12 @@ describe('PeripheryPaymentsExtended', function () {
     ;({ wsei, router } = await loadFixture(routerFixture))
   })
 
-  describe('wrapETH', () => {
+  describe('wrapSEI', () => {
     it('increases router WSEI balance by value amount', async () => {
       const value = ethers.utils.parseEther('1')
 
       const wseiBalancePrev = await wsei.balanceOf(router.address)
-      await router.wrapETH(value, { value })
+      await router.wrapSEI(value, { value })
       const wseiBalanceCurrent = await wsei.balanceOf(router.address)
 
       expect(wseiBalanceCurrent.sub(wseiBalancePrev)).to.equal(value)

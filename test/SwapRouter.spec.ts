@@ -4,7 +4,7 @@ import { Fixture } from 'ethereum-waffle'
 import { BigNumber, constants, Contract, ContractTransaction, Wallet } from 'ethers'
 import { solidityPack } from 'ethers/lib/utils'
 import { ethers, waffle } from 'hardhat'
-import { IDragonswapPair, IWSEI, MockTimeSwapRouter02, MixedRouteQuoterV1, TestERC20 } from '../typechain'
+import { IDragonswapPair, IWSEI, MockTimeSwapRouter02, PeripheryPayments, MixedRouteQuoterV1, TestERC20 } from '../typechain'
 import completeFixture from './shared/completeFixture'
 import { computePoolAddress } from './shared/computePoolAddress'
 import {
@@ -83,7 +83,7 @@ describe('SwapRouter', function () {
       ['bytes4', 'bytes'],
       [
         router.interface.getSighash(functionSignature),
-        defaultAbiCoder.encode(router.interface.functions[functionSignature].inputs, [amount, trader.address]),
+        defaultAbiCoder.encode(["uint256", "address"], [amount, trader.address]),
       ]
     )
   }
