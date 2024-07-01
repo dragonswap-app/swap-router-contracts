@@ -1,7 +1,13 @@
-artifacts/
 cache/
 crytic-export/
 node_modules/
 typechain/
 .env
 .vscode
+
+artifacts/*
+!artifacts/contracts
+artifacts/contracts/**/*.dbg.json
+artifacts/contracts/test
+artifacts/contracts/base
+

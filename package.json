@@ -16,15 +16,6 @@
     "type": "git",
     "url": "https://github.com/dragonswap-app/swap-router-contracts"
   },
-  "files": [
-    "contracts/base",
-    "contracts/interfaces",
-    "contracts/libraries",
-    "artifacts/contracts/**/*.json",
-    "!artifacts/contracts/**/*.dbg.json",
-    "!artifacts/contracts/test/**/*",
-    "!artifacts/contracts/base/**/*"
-  ],
   "engines": {
     "node": ">=10"
   },
