@@ -3,11 +3,9 @@ pragma solidity =0.7.6;
 pragma abicoder v2;
 
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
-import '@dragonswap/v2-periphery/contracts/base/PeripheryImmutableState.sol';
 import '@dragonswap/core/contracts/interfaces/IDragonswapCallee.sol';
 import '@dragonswap/core/contracts/interfaces/IDragonswapPair.sol';
 import '../libraries/DragonswapLibrary.sol';
-import '../interfaces/ISwapRouter02.sol';
 import '../interfaces/ITokenValidator.sol';
 import '../base/ImmutableState.sol';
 

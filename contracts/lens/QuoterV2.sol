@@ -5,7 +5,6 @@ pragma abicoder v2;
 import '@dragonswap/v2-periphery/contracts/base/PeripheryImmutableState.sol';
 import '@dragonswap/v2-core/contracts/libraries/SafeCast.sol';
 import '@dragonswap/v2-core/contracts/libraries/TickMath.sol';
-import '@dragonswap/v2-core/contracts/libraries/TickBitmap.sol';
 import '@dragonswap/v2-core/contracts/interfaces/IDragonswapV2Pool.sol';
 import '@dragonswap/v2-core/contracts/interfaces/callback/IDragonswapV2SwapCallback.sol';
 import '@dragonswap/v2-periphery/contracts/libraries/Path.sol';
