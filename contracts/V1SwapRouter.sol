@@ -22,7 +22,7 @@ abstract contract V1SwapRouter is IV1SwapRouter, ImmutableState, PeripheryPaymen
         for (uint256 i; i < path.length - 1; i++) {
             (address input, address output) = (path[i], path[i + 1]);
             (address token0, ) = DragonswapLibrary.sortTokens(input, output);
-            IDragonswapPair pair = IDragonswapPair(DragonswapLibrary.pairFor(factory, input, output));
+            IDragonswapPair pair = IDragonswapPair(DragonswapLibrary.pairFor(factoryV1, input, output));
             uint256 amountInput;
             uint256 amountOutput;
             // scope to avoid stack too deep errors
@@ -35,7 +35,7 @@ abstract contract V1SwapRouter is IV1SwapRouter, ImmutableState, PeripheryPaymen
             }
             (uint256 amount0Out, uint256 amount1Out) =
                 input == token0 ? (uint256(0), amountOutput) : (amountOutput, uint256(0));
-            address to = i < path.length - 2 ? DragonswapLibrary.pairFor(factory, output, path[i + 2]) : _to;
+            address to = i < path.length - 2 ? DragonswapLibrary.pairFor(factoryV1, output, path[i + 2]) : _to;
             pair.swap(amount0Out, amount1Out, to, new bytes(0));
         }
     }
@@ -57,7 +57,7 @@ abstract contract V1SwapRouter is IV1SwapRouter, ImmutableState, PeripheryPaymen
         pay(
             path[0],
             hasAlreadyPaid ? address(this) : msg.sender,
-            DragonswapLibrary.pairFor(factory, path[0], path[1]),
+            DragonswapLibrary.pairFor(factoryV1, path[0], path[1]),
             amountIn
         );
 
@@ -80,10 +80,10 @@ abstract contract V1SwapRouter is IV1SwapRouter, ImmutableState, PeripheryPaymen
         address[] calldata path,
         address to
     ) external payable override returns (uint256 amountIn) {
-        amountIn = DragonswapLibrary.getAmountsIn(factory, amountOut, path)[0];
+        amountIn = DragonswapLibrary.getAmountsIn(factoryV1, amountOut, path)[0];
         require(amountIn <= amountInMax, 'Too much requested');
 
-        pay(path[0], msg.sender, DragonswapLibrary.pairFor(factory, path[0], path[1]), amountIn);
+        pay(path[0], msg.sender, DragonswapLibrary.pairFor(factoryV1, path[0], path[1]), amountIn);
 
         // find and replace to addresses
         if (to == Constants.MSG_SENDER) to = msg.sender;
