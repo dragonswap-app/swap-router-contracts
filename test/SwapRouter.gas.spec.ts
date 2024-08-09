@@ -81,11 +81,9 @@ describe('SwapRouter gas tests', function () {
       factory.getPool(wsei.address, tokens[0].address, FeeAmount.MEDIUM),
     ])
 
-    const pools = poolAddresses.map((poolAddress) => new ethers.Contract(poolAddress, IDragonswapV2PoolABI, wallet)) as [
-      IDragonswapV2Pool,
-      IDragonswapV2Pool,
-      IDragonswapV2Pool
-    ]
+    const pools = poolAddresses.map(
+      (poolAddress) => new ethers.Contract(poolAddress, IDragonswapV2PoolABI, wallet)
+    ) as [IDragonswapV2Pool, IDragonswapV2Pool, IDragonswapV2Pool]
 
     return {
       wsei,

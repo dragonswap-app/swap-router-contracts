@@ -2,7 +2,10 @@ import {
   abi as FACTORY_ABI,
   bytecode as FACTORY_BYTECODE,
 } from '@dragonswap/v2-core/artifacts/contracts/DragonswapV2Factory.sol/DragonswapV2Factory.json'
-import { abi as FACTORY_V1_ABI, bytecode as FACTORY_V1_BYTECODE } from '@dragonswap/core/artifacts/contracts/DragonswapFactory.sol/DragonswapFactory.json'
+import {
+  abi as FACTORY_V1_ABI,
+  bytecode as FACTORY_V1_BYTECODE,
+} from '@dragonswap/core/artifacts/contracts/DragonswapFactory.sol/DragonswapFactory.json'
 import { Fixture } from 'ethereum-waffle'
 import { ethers, waffle } from 'hardhat'
 import { IWSEI, MockTimeSwapRouter02 } from '../../typechain'
@@ -32,7 +35,7 @@ export const v1FactoryFixture: Fixture<{ factory: Contract }> = async ([wallet])
       bytecode: FACTORY_V1_BYTECODE,
       abi: FACTORY_V1_ABI,
     },
-    ["0x0000000000000000000000000000000000000001"]
+    ['0x0000000000000000000000000000000000000001']
   )
 
   return { factory }

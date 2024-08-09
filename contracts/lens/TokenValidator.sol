@@ -68,7 +68,8 @@ contract TokenValidator is ITokenValidator, IDragonswapCallee, ImmutableState {
 
         // If the token/baseToken pair exists, get token0.
         // Must do low level call as try/catch does not support case where contract does not exist.
-        (, bytes memory returnData) = address(pairAddress).call(abi.encodeWithSelector(IDragonswapPair.token0.selector));
+        (, bytes memory returnData) =
+            address(pairAddress).call(abi.encodeWithSelector(IDragonswapPair.token0.selector));
 
         if (returnData.length == 0) {
             return Status.UNKN;
