@@ -219,7 +219,6 @@
 
 "@dragonswap/core@https://github.com/dragonswap-app/dragonswap-core":
   version "1.0.0"
-  uid "9dff29ca7a10266338881132df8c7db70303c252"
   resolved "https://github.com/dragonswap-app/dragonswap-core#9dff29ca7a10266338881132df8c7db70303c252"
   dependencies:
     "@commitlint/cli" "^17.0.3"
@@ -235,33 +234,16 @@
     scrypt "github:barrysteyn/node-scrypt#fb60a8d3c158fe115a624b5ffa7480f3a24b03fb"
     solhint "4.1.1"
 
-"@dragonswap/core@https://github.com/dragonswap-app/dragonswap-core.git":
+"@dragonswap/v2-core@https://github.com/dragonswap-app/v2-core":
   version "1.0.0"
-  resolved "https://github.com/dragonswap-app/dragonswap-core.git#9dff29ca7a10266338881132df8c7db70303c252"
-  dependencies:
-    "@commitlint/cli" "^17.0.3"
-    "@commitlint/config-conventional" "^17.0.3"
-    commitlint-config-gitmoji "^2.2.5"
-    commitlint-plugin-gitmoji "^2.2.0"
-    dotenv "16.4.1"
-    hardhat-contract-sizer "2.10.0"
-    hardhat-gas-reporter "1.0.9"
-    hardhat-web3 "1.0.1"
-    husky "^8.0.1"
-    pre-commit "^1.2.2"
-    scrypt "github:barrysteyn/node-scrypt#fb60a8d3c158fe115a624b5ffa7480f3a24b03fb"
-    solhint "4.1.1"
+  resolved "https://github.com/dragonswap-app/v2-core#77f934dd7182abf934787645d8b44057f61acf23"
 
-"@dragonswap/v2-core@git+ssh://git@github.com:dragonswap-app/v2-core.git":
+"@dragonswap/v2-periphery@https://github.com/dragonswap-app/v2-periphery":
   version "1.0.0"
-  resolved "git+ssh://git@github.com:dragonswap-app/v2-core.git#77f934dd7182abf934787645d8b44057f61acf23"
-
-"@dragonswap/v2-periphery@git+ssh://git@github.com:dragonswap-app/v2-periphery.git":
-  version "1.0.0"
-  resolved "git+ssh://git@github.com:dragonswap-app/v2-periphery.git#da9d3a5491607b3e88a5133b7fd3c5c1f1f317eb"
+  resolved "https://github.com/dragonswap-app/v2-periphery#2ecd865e6f2ce06387dab459c3df03456210088b"
   dependencies:
     "@dragonswap/core" "https://github.com/dragonswap-app/dragonswap-core"
-    "@dragonswap/v2-core" "git+ssh://git@github.com:dragonswap-app/v2-core.git"
+    "@dragonswap/v2-core" "https://github.com/dragonswap-app/v2-core"
     "@openzeppelin/contracts" "3.4.2-solc-0.7"
     base64-sol "1.0.1"
 
