@@ -7,7 +7,7 @@ This repository contains smart contracts for swapping on the Dragonswap V1 and V
 
 ## Links
 
-- [Audit](https://github.com/dragonswap-app/v2-core/blob/main/audits/20240801_Paladin_DragonSwapDEX_Final_Report.pdf)
+- [Audit report](https://github.com/dragonswap-app/v2-core/blob/main/audits/20240801_Paladin_DragonSwapDEX_Final_Report.pdf)
 
 ## Local deployment
 
